@@ -49,5 +49,9 @@ public class MyStack {
         myStack.push(5);
         System.out.println(myStack.getMin());
         System.out.println(myStack.pop());
+        myStack.push(9);
+
+        System.out.println(myStack.getMin());
+        System.out.println(myStack.pop());
     }
 }
