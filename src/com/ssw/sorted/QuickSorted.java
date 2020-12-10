@@ -20,7 +20,7 @@ public class QuickSorted {
             if (arr[cur] < arr[R]) {
                 swap(arr, cur++, ++less);
             } else if (arr[cur] > arr[R]) {
-                swap(arr, cur++, --more);
+                swap(arr, cur, --more);
             } else {
                 cur++;
             }
@@ -33,8 +33,8 @@ public class QuickSorted {
     public static void quickSort(int[] arr, int L, int R) {
         if (L < R) {
             int[] p = partition(arr, L, R);
-            quickSort(arr, L, p[0] + 1);
-            quickSort(arr, p[1] - 1, R);
+            quickSort(arr, L, p[0] - 1);
+            quickSort(arr, p[1] + 1, R);
         }
     }
 
