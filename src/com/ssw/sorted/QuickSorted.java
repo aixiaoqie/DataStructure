@@ -1,4 +1,4 @@
-package src.com.ssw.sorted;
+package com.ssw.sorted;
 
 /**
  * 快排
