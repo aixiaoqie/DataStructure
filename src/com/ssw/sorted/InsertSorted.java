@@ -1,7 +1,7 @@
 package com.ssw.sorted;
 
 /**
- * 插入排序
+ * 插入排序（小->大）
  */
 public class InsertSorted {
 

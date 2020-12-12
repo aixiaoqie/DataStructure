@@ -1,7 +1,7 @@
 package com.ssw.sorted;
 
 /**
- * 冒泡排序
+ * 冒泡排序（小->大）
  */
 public class BubbleSorted {
 

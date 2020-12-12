@@ -1,7 +1,7 @@
 package com.ssw.sorted;
 
 /**
- * 快排
+ * 快排（小->大）
  */
 public class QuickSorted {
     //交换

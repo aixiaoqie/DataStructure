@@ -1,7 +1,7 @@
 package com.ssw.sorted;
 
 /**
- * 选择排序
+ * 选择排序（小->大）
  */
 public class SelectSorted {
 

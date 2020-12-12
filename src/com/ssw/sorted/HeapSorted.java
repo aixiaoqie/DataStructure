@@ -1,7 +1,7 @@
 package src.com.ssw.sorted;
 
 /**
- * 堆排
+ * 堆排 （小->大）
  */
 public class HeapSorted {
 
