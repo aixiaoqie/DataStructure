@@ -54,13 +54,31 @@ public class BinaryTreeTraversal {
             Stack<Node> stack = new Stack<>();
             stack.push(head);
             while (!stack.empty()) {
-                head = stack.pop();
-                System.out.println(head.value + "");
-                if (head.right != null) {
-                    stack.push(head.right);
+                Node cur = stack.pop();
+                System.out.println(cur.value + "");
+                if (cur.right != null) {
+                    stack.push(cur.right);
                 }
-                if (head.left != null) {
-                    stack.push(head.left);
+                if (cur.left != null) {
+                    stack.push(cur.left);
+                }
+            }
+        }
+    }
+
+    //非递归实现中序遍历
+    public void midRootTraversalNonRecursive(Node head) {
+        if (head != null) {
+            Stack<Node> stack = new Stack<>();
+            Node cur = head;
+            while (!stack.empty() || cur != null) {
+                if (cur != null) {
+                    stack.push(cur);
+                    cur = cur.left;
+                } else {
+                    cur = stack.pop();
+                    System.out.println(cur.value + "");
+                    cur = cur.right;
                 }
             }
         }
