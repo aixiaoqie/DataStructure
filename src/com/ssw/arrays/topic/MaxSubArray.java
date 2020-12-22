@@ -45,6 +45,14 @@ public class MaxSubArray {
      * <p>
      * sum(i) 为数组arr[0,i]的累加值，sum(j)为数组arr[0,j]的累计值   ( 0<=j<=i<arr.length )
      * 如果 sum(i) -sum(j) = k;说明 arr[j+1,i]的sum值为k
+     * <p>
+     * <p>
+     * 补充问题1： 无序数组arr,其中有正数、负数、0，求其中正数与负数个数相同的最大子数组长度
+     * 解法：将其中正数变为1，负数变为-1，0不变，求此时这个数组累加值为0的最大子数组长度
+     * <p>
+     * <p>
+     * 补充问题2： 无序数组arr,其中有只有0，1，求其中0的个数与1的个数相同的最大子数组长度
+     * 解法：将其中0变为-1，求此时这个数组累加值为0的最大子数组长度
      */
     public int getMaxSubArrLength(int[] arr, int k) {
         if (arr == null || arr.length == 0) {
@@ -64,7 +72,6 @@ public class MaxSubArray {
             }
         }
         return len;
-
     }
 
 
