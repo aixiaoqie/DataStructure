@@ -1,5 +1,8 @@
 package src.com.ssw.arrays.topic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 根据不同条件 获取最大子数组长度
  */
@@ -8,7 +11,7 @@ public class MaxSubArray {
 
     /**
      * 无序正数数组，求累加值为k的最长子数组
-     * 不考虑数组越界问题
+     * 不考虑类型越界问题
      * 时间复杂度O(N),额外空间复杂度O(1)
      */
     public int getMaxLength(int[] arr, int k) {
@@ -35,11 +38,47 @@ public class MaxSubArray {
         return len;
     }
 
+
+    /**
+     * 无序数组，求累加值为k的最大子数组长度
+     * 时间复杂的O(N),额外空间复杂度O(N)
+     * <p>
+     * sum(i) 为数组arr[0,i]的累加值，sum(j)为数组arr[0,j]的累计值   ( 0<=j<=i<arr.length )
+     * 如果 sum(i) -sum(j) = k;说明 arr[j+1,i]的sum值为k
+     */
+    public int getMaxSubArrLength(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        Map<Integer, Integer> map = new HashMap<>();//负责存储数组循环sum值第一次出现的位置(sum,i)
+        map.put(-1, 0);//arr[j+1,i]的累加值为k，如果从0位置开始累加会导致从0位置的数组被排除，需要从-1位置开始累加
+        int len = 0;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (map.containsKey(sum - k)) {//获取s(j)出现的位置
+                len = Math.max(len, i - map.get(sum - k));
+            }
+            if (!map.containsKey(sum)) {
+                map.put(sum, i); //记录sum值第一次出现时的数组位置，获得最长子数组
+            }
+        }
+        return len;
+
+    }
+
+
     public static void main(String[] args) {
-        int[] arr = {1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4};
+//        int[] arr = {1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4};
+//        MaxSubArray maxSubArray = new MaxSubArray();
+//        int length = maxSubArray.getMaxLength(arr, 4);
+//        System.out.println("正数数组总和为4的最大子数组长度为：" + length);
+
+        int[] arr = {-1, -2, -1, -1, 2, 2, 3, 3, 4};
         MaxSubArray maxSubArray = new MaxSubArray();
-        int length = maxSubArray.getMaxLength(arr, 4);
-        System.out.println("正数数组总和为4的最大子数组长度为：" + length);
+        int length = maxSubArray.getMaxSubArrLength(arr, 2);
+        System.out.println("数组总和为4的最大子数组长度为：" + length);
+
     }
 
 }
