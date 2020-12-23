@@ -75,6 +75,60 @@ public class MaxSubArray {
     }
 
 
+    /**
+     * 获得未排序数组中累加和小于或等于给定值k的最长子数组长度
+     * 时间复杂的O(N*LogN),额外空间复杂度O(N)
+     */
+    public int maxLength(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+
+        int[] help = new int[arr.length + 1]; //生成sumArr的左侧最大值辅助数组，当arr[0,i]为sum(i)时 arr[0,j]为sum(j) ,记录sum[j]大于等于k的出现的记录，只关心累加值第一次出现的位置
+        int sum = 0;
+        help[0] = sum;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            help[i + 1] = Math.max(sum, help[i]);
+        }
+
+        sum = 0;
+        int pre = 0;// sum-k 的值第一次出现的位置
+        int len = 0;
+        int res = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            pre = getLessIndex(help, sum - k); //help数组有序，二分查找大于sum-k第一次出现的位置下标 help数组的j位置对应原数组j-1位置
+            len = pre == -1 ? len : i - pre + 1;
+            res = Math.max(len, res);
+        }
+        return res;
+
+    }
+
+    /**
+     * 二分法查找 大于等于 sum-k 的值第一次出现的位置
+     *
+     * @return
+     */
+    public int getLessIndex(int[] arr, int num) {
+        int res = -1;
+        int left = 0;
+        int right = arr.length - 1;
+        int mid = 0;
+
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (arr[mid] >= num) {
+                res = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 //        int[] arr = {1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4};
 //        MaxSubArray maxSubArray = new MaxSubArray();
@@ -83,8 +137,9 @@ public class MaxSubArray {
 
         int[] arr = {-1, -2, -1, -1, 2, 2, 3, 3, 4};
         MaxSubArray maxSubArray = new MaxSubArray();
-        int length = maxSubArray.getMaxSubArrLength(arr, 2);
-        System.out.println("数组总和为4的最大子数组长度为：" + length);
+//        int length = maxSubArray.getMaxSubArrLength(arr, 2);
+        int length = maxSubArray.maxLength(arr, 2);
+        System.out.println("小于等于2的最大子数组长度为：" + length);
 
     }
 
