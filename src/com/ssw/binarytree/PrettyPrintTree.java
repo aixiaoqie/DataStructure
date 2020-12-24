@@ -40,7 +40,7 @@ public class PrettyPrintTree {
      * @param head   头节点
      * @param height 一个二叉树逆时针90度 从左到右打印为向上的高度
      *               大体示意图如下
-     *                                          V5V       
+     *                                          V5V
      *                         V3V
      *        H1H
      *                         ∧2∧
