@@ -1,4 +1,4 @@
-package src.com.ssw.arrays.topic;
+package com.ssw.arrays.topic;
 
 import java.util.HashMap;
 import java.util.Map;

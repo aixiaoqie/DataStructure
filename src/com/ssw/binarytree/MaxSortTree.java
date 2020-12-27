@@ -1,4 +1,4 @@
-package src.com.ssw.binarytree;
+package com.ssw.binarytree;
 
 /**
  * 二叉树头节点为head，求此二叉树的最大搜索二叉树

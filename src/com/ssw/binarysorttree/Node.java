@@ -1,4 +1,4 @@
-package src.com.ssw.binarysorttree;
+package com.ssw.binarysorttree;
 
 /**
  * 树节点类

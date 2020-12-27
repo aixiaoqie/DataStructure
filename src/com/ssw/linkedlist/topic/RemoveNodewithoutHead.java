@@ -1,4 +1,4 @@
-package src.com.ssw.linkedlist.topic;
+package com.ssw.linkedlist.topic;
 
 /**
  * 一个值为int类型的链表，不给链表head节点，如何删除一个指定的节点，

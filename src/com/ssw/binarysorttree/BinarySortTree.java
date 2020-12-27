@@ -1,4 +1,4 @@
-package src.com.ssw.binarysorttree;
+package com.ssw.binarysorttree;
 
 /**
  * 二叉排序树的创建与遍历

@@ -1,4 +1,4 @@
-package src.com.ssw.binarytree;
+package com.ssw.binarytree;
 
 public class Node {
     public int value;

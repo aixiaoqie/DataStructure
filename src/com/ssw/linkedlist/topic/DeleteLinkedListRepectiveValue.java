@@ -1,4 +1,4 @@
-package src.com.ssw.linkedlist.topic;
+package com.ssw.linkedlist.topic;
 
 import java.util.HashSet;
 

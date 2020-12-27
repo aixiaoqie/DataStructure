@@ -1,4 +1,4 @@
-package src.com.ssw.binarytree;
+package com.ssw.binarytree;
 
 /**
  * 较为直观的打印一颗树，方便构造其结构
