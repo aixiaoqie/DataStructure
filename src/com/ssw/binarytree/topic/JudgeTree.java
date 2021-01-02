@@ -2,6 +2,9 @@ package com.ssw.binarytree.topic;
 
 import com.ssw.binarytree.Node;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 判断树的结构
  */
@@ -78,6 +81,49 @@ public class JudgeTree {
             cur1 = cur1.right;
         }
         return res;
+    }
+
+    /**
+     * 判断树是否为完全二叉树
+     * <p>
+     * 问题：给定一个二叉树的头节点head，已知其中没有重复值的节点，判断树是否为完全二叉树
+     * <p>
+     * 解：通过以下标准会使判断过程变得简单且易实现
+     * 1.按层遍历二叉树，从每层的左边向右边依次遍历所有节点；
+     * 2.如果当前节点有孩子，但没有左孩子，直接返回false；
+     * 3.如果当前节点并不是左右孩子全有，那之后的节点必须全部为叶子节点，否则返回false；
+     * 4.遍历过程中如果不返回false，遍历结束后返回true。
+     */
+    public boolean isCBF(Node head) {
+        if (head == null) {
+            return true;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        boolean leaf = false;
+        Node l = null;
+        Node r = null;
+        queue.offer(head);
+        while (!queue.isEmpty()) {
+            head = queue.poll();
+            l = head.left;
+            r = head.right;
+            /**
+             * l == null && r != null ,当前节点有孩子，但没有左孩子，直接返回false
+             * leaf && (l != null || r != null)，到此层循环当前节点有左右节点说明不是叶子节点，返回false
+             */
+            if (leaf && (l != null || r != null) || (l == null && r != null)) {
+                return false;
+            }
+            if (l != null) {
+                queue.offer(l);
+            }
+            if (r != null) {
+                queue.offer(r);
+            } else {
+                leaf = true; //当前节点没有右节点，将leaf标识设为true，表示之后的节点必须全部为叶子节点
+            }
+        }
+        return true;
     }
 
 }
