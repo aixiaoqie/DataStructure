@@ -41,4 +41,43 @@ public class JudgeTree {
         }
         return Math.max(lH, rH);
     }
+
+    /**
+     * 判断树是否为搜索二叉树
+     * <p>
+     * 问题：给定一个二叉树的头节点head，已知其中没有重复值的节点，判断这颗树是否为搜索二叉树
+     * <p>
+     * 解：判断一颗树是否为搜索二叉树，只要改写二叉树中序遍历，在遍历的过程中判断节点值是否递增即可。
+     */
+    public boolean isBST(Node head) {
+        if (head == null) {
+            return true;
+        }
+        boolean res = true;
+        Node pre = null;
+        Node cur1 = head;
+        Node cur2 = null;
+        while (cur1 != null) {
+            cur2 = cur1.left;
+            if (cur2 != null) {
+                while (cur2.right != null && cur2.right != cur1) {
+                    cur2 = cur2.right;
+                }
+                if (cur2.right == null) {
+                    cur2.right = cur1;
+                    cur1 = cur1.left;
+                    continue;
+                } else {
+                    cur2.right = null;
+                }
+            }
+            if (pre != null && pre.value > cur1.value) {
+                res = false;
+            }
+            pre = cur1;
+            cur1 = cur1.right;
+        }
+        return res;
+    }
+
 }
