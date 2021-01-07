@@ -41,8 +41,6 @@ public class JudgeString {
                 return false;
             }
         }
-
-
         return true;
     }
 
@@ -52,4 +50,6 @@ public class JudgeString {
         boolean inflection = isInflection(s1, s2);
         System.out.println(inflection);
     }
+
+
 }
