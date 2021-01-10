@@ -1,4 +1,4 @@
-package com.ssw.arrays.topic;
+package com.ssw.arrays.topic.mergeSort;
 
 import static com.ssw.sorted.MergeSorted.merge;
 
