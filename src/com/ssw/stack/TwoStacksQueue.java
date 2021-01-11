@@ -40,4 +40,19 @@ public class TwoStacksQueue {
         return (int) stackPop.peek();
     }
 
+    /**
+     * 封装倒数据的方法
+     * 需满足2个条件
+     * 1.pop栈中有数据不能将push数据倒入
+     * 2.push栈中倒数据都要倒完
+     **/
+    public void dao() {
+        if (!stackPop.isEmpty()) {
+            return;
+        }
+        while (!stackPush.isEmpty()) {
+            stackPop.push(stackPush.pop());
+        }
+    }
+
 }
