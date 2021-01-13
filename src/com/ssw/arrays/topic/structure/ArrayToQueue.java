@@ -1,14 +1,16 @@
 package com.ssw.arrays.topic.structure;
 
 /**
+ * 使用数组结构实现大小固定的栈和队列
+ * <p>
  * 数组结构实现大小固定的队列
  */
 public class ArrayToQueue {
 
     private Integer[] arr;
     private Integer size;
-    private Integer first;
-    private Integer last;
+    private Integer start;
+    private Integer end;
 
     public ArrayToQueue(int initSize) {
         if (initSize < 0) {
@@ -16,8 +18,8 @@ public class ArrayToQueue {
         }
         arr = new Integer[initSize];
         size = 0;
-        first = 0;
-        last = 0;
+        start = 0;
+        end = 0;
     }
 
     public void push(int num) {
@@ -25,8 +27,8 @@ public class ArrayToQueue {
             throw new ArrayIndexOutOfBoundsException("the queue is full");
         }
         size++;
-        arr[last] = num;
-        last = last == arr.length - 1 ? 0 : last + 1;
+        arr[end] = num;
+        end = end == arr.length - 1 ? 0 : end + 1;
     }
 
     public Integer poll() {
@@ -34,8 +36,8 @@ public class ArrayToQueue {
             throw new ArrayIndexOutOfBoundsException("the queue is empty");
         }
         size--;
-        int tmp = first;
-        first = first == arr.length - 1 ? 0 : first + 1;
+        int tmp = start;
+        start = start == arr.length - 1 ? 0 : start + 1;
         return arr[tmp];
     }
 
@@ -43,7 +45,7 @@ public class ArrayToQueue {
         if (size == 0) {
             return null;
         }
-        return arr[first];
+        return arr[start];
     }
 
     public static void main(String[] args) {
