@@ -83,4 +83,28 @@ public class BinaryTreeTraversal {
             }
         }
     }
+
+    //非递归实现后序遍历
+    // 先将二叉树按照 中 右 左的顺序放到另一个栈中，然后从另一个栈中弹出打印实现左 右 头的后序遍历
+    public void postRootTraversalNonRecursive(Node head) {
+        if (head != null) {
+            Stack<Node> stack = new Stack<>();
+            Stack<Node> help = new Stack<>();
+            stack.push(head);
+            while (!stack.isEmpty()) {
+                head = stack.pop();
+                help.push(head);
+                if (head.left != null) {
+                    stack.push(head.left);
+                }
+                if (head.right != null) {
+                    stack.push(head.right);
+                }
+            }
+            while (!help.isEmpty()) {
+                System.out.println(help.pop().value + " ");
+            }
+
+        }
+    }
 }

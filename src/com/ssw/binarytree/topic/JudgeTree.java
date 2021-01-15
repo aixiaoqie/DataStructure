@@ -122,6 +122,20 @@ public class JudgeTree {
             } else {
                 leaf = true; //当前节点没有右节点，将leaf标识设为true，表示之后的节点必须全部为叶子节点
             }
+            /*
+
+            与上面等效
+            if (l != null) {
+                queue.offer(l);
+            }
+            if (r != null) {
+                queue.offer(r);
+            }
+            if (l == null || r == null) {
+                leaf = true; 
+            }
+            */
+
         }
         return true;
     }
