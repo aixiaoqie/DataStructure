@@ -43,6 +43,7 @@ public class PrintCommonPart {
 		node1.next = new Node(3);
 		node1.next.next = new Node(5);
 		node1.next.next.next = new Node(6);
+		node1.next.next.next.next = new Node(8);
 
 		Node node2 = new Node(1);
 		node2.next = new Node(2);
