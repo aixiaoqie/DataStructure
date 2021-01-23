@@ -1,5 +1,10 @@
 package com.ssw.arrays.topic.structure;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 在数组中找到出现次数大于N/K的数
  * <p>
@@ -42,9 +47,86 @@ public class GetNumMoreThanHarf {
         }
     }
 
+
+    /**
+     * 进阶问题：给定一个整型数组arr，在给定一个整数k，打印所有出现次数大于N/k的数，如果没有这样的数，打印提示信息。
+     * <p>
+     * 要求：时间复杂度O(N*K),额外空间复杂度O(K).
+     * <p>
+     * 解题思路：用 k-1个候选，然后 k-1个times
+     * 遍历到arr[i]时，看arr[i]是否与已经被选出的某一个候选相同：
+     * 1.如果相同，把当前候选点数加1；
+     * 2.如果与所有的候选都不同，先看当前的候选是否满了，k-1就是满，否则就是不满：
+     * 2.1如果不满，把arr[i]作为一个新的候选，属于他的点数初始化为1.
+     * 2.2如果已满，说明此时发现了k个不同的数，arr[i]就是第k个，此时把每一个候选各自的点数全部减一，表示每个候选付出一个自己的点数。
+     * 如果某些候选的点数在减1之后等于0，把这些候选删除，候选又变成不满的状态。
+     */
+    public void printKMajor(int[] arr, int k) {
+        if (k < 2) {
+            System.out.println("k is invalid");
+            return;
+        }
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (hashMap.containsKey(arr[i])) {
+                hashMap.put(arr[i], hashMap.get(arr[i]) + 1);
+            } else {
+                if (hashMap.size() == k - 1) {
+                    allCandsAdjust(hashMap);
+                } else {
+                    hashMap.put(arr[i], 1);
+                }
+            }
+        }
+        HashMap<Integer, Integer> reals = getReals(arr, hashMap);
+        boolean isPrint = false;
+        for (Map.Entry<Integer, Integer> set : hashMap.entrySet()) {
+            if (reals.get(set.getKey()) > arr.length / k) {
+                isPrint = true;
+                System.out.println(set.getKey() + " ");
+            }
+        }
+        System.out.println(isPrint ? "" : "no such number");
+    }
+
+    //k-1个候选已满的调整操作，每一个候选各自的点数减一，减一之后变为0，把候选删除
+    public void allCandsAdjust(HashMap<Integer, Integer> map) {
+        List<Integer> removeList = new ArrayList<>();//减到1需要记录需要删除的候选节点
+        for (Map.Entry<Integer, Integer> set : map.entrySet()) {
+            int key = set.getKey();
+            int value = set.getValue();
+            if (value == 1) {
+                removeList.add(key);
+            }
+            map.put(key, value - 1);
+        }
+        for (Integer removeKey : removeList) {
+            map.remove(removeKey);
+        }
+
+    }
+
+    /**
+     * 统计候选节点每个节点出现的频次
+     */
+    public HashMap<Integer, Integer> getReals(int[] arr, HashMap<Integer, Integer> cands) {
+        HashMap<Integer, Integer> reals = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            int curNum = arr[i];
+            if (cands.containsKey(curNum)) {
+                if (reals.containsKey(curNum)) {
+                    reals.put(curNum, reals.get(curNum) + 1);
+                } else {
+                    reals.put(curNum, 1);
+                }
+            }
+        }
+        return reals;
+    }
+
     public static void main(String[] args) {
         GetNumMoreThanHarf harf = new GetNumMoreThanHarf();
-        int[] arr = new int[]{1, 2, 3, 4, 2, 2, 2};
-        harf.printHalfMajor(arr);
+        int[] arr = new int[]{3, 2, 3, 3, 2, 2, 2};
+        harf.printKMajor(arr, 3);
     }
 }
