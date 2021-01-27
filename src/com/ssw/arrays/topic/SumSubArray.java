@@ -28,7 +28,33 @@ public class SumSubArray {
 
     /**
      * 子矩阵的最大累加和问题
-     *
+     * <p>
      * 给定一个矩阵matrix，其中有正负0，返回子矩阵的最大累加和。
+     * <p>
+     * 时间复杂度O(N^3)
      */
+
+    public static int getMatrixSum(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+        int max = Integer.MIN_VALUE;
+        int[] s = null;
+        int sum = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            s = new int[matrix[0].length];
+            for (int j = i; j < matrix.length; j++) {
+                sum = 0;
+                for (int k = 0; k < s.length; k++) {
+                    s[k] += matrix[j][k];
+                    sum += s[k];
+                    max = Math.max(max, sum);
+                    sum = sum < 0 ? 0 : sum;
+                }
+            }
+        }
+        return max;
+    }
+
+
 }
