@@ -9,7 +9,7 @@ public class Test {
     public static void main(String[] args) {
 
         String s = "rat";
-        String t = "tar11";
+        String t = "tar";
         System.out.println(isAnagram(s,t));
     }
 
