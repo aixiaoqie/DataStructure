@@ -34,7 +34,9 @@ public class AnotherStackSort {
         stack.push(5);
         stack.push(8);
         sortStack(stack);
-
+       while (!stack.isEmpty()){
+           System.out.println(stack.pop());
+       }
         //导入到新的开发环境
 
     }
