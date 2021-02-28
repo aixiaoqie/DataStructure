@@ -41,9 +41,6 @@ public class GetUpMedian {
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3, 4};
         int[] arr2 = {3, 4, 5, 6};
-        int[] arr3 = {0, 1, 2};
-        int[] arr4 = {3, 4, 5};
         System.out.println(getUpMedian(arr1, arr2));
-        System.out.println(getUpMedian(arr3, arr4));
     }
 }
