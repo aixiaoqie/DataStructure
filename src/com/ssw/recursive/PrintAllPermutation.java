@@ -40,6 +40,7 @@ public class PrintAllPermutation {
 
     public static void main(String[] args) {
         PrintAllPermutation("abc");
+        PrintAllPermutation("abc");
     }
 
 }
