@@ -40,8 +40,8 @@ public class MergeSortSeriesIdea {
         int p2 = mid + 1;
         int sum = 0;
         while (p1 <= mid && p2 <= r) {
-            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
             sum += arr[p1] < arr[p2] ? (r - p2 + 1) * arr[p1] : 0;//计算小和
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
         }
         while (p1 <= mid) {
             help[i++] = arr[p1++];
@@ -54,4 +54,31 @@ public class MergeSortSeriesIdea {
         }
         return sum;
     }
+
+    /**
+     * 逆序对问题 ,归并的逻辑
+     */
+    public int merge2(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r - l + 1];
+        int p1 = l;
+        int p2 = mid + 1;
+        int i = 0;
+        int res = 0;
+        while (p1 <= mid && p2 <= r) {
+            res += arr[p1] > arr[p2] ? (r - p2 + 1) : 0;//返回逆序对的个数
+            help[i++] = arr[p1] > arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while (p1 <= mid) {
+            help[i++] = arr[p1++];
+        }
+        while (p2 <= r) {
+            help[i++] = arr[p2++];
+        }
+        for (int j = 0; j < help.length; j++) {
+            arr[l + j] = help[j];
+        }
+        return res;
+    }
+
+
 }
