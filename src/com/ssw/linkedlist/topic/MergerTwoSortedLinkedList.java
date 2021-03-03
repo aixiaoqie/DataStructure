@@ -53,7 +53,7 @@ public class MergerTwoSortedLinkedList {
 
     public static void main(String[] args) {
 
-        Node node1 = new Node(1);
+        Node node1 = new Node(2);
         node1.next = new Node(2);
         node1.next.next = new Node(4);
 
