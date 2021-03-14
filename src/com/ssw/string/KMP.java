@@ -1,5 +1,8 @@
 package com.ssw.string;
 
+/**
+ * 字符串匹配算法KMP
+ */
 public class KMP {
     public static int getIndexOf(String s, String m) {
         if (s == null || m == null || m.length() < 1 || s.length() < m.length()) {
@@ -25,7 +28,7 @@ public class KMP {
 
     public static int[] getNextArray(char[] ms) {
         if (ms.length == 1) {
-            return new int[] { -1 };
+            return new int[]{-1};
         }
         int[] next = new int[ms.length];
         next[0] = -1;
