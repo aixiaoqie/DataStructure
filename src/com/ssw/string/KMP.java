@@ -31,12 +31,12 @@ public class KMP {
         next[0] = -1;
         next[1] = 0;
         int pos = 2;
-        int cn = 0;
+        int cn = 0;//代表跳到的位置
         while (pos < next.length) {
             if (ms[pos - 1] == ms[cn]) {
-                next[pos++] = ++cn;
+                next[pos++] = ++cn;//++cn此时的cn代表pos-1 最长前缀与后缀匹配区域的长度
             } else if (cn > 0) {
-                cn = next[cn];
+                cn = next[cn];//cn位置左移
             } else {
                 next[pos++] = 0;
             }
