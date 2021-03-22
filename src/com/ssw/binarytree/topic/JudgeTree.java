@@ -140,4 +140,24 @@ public class JudgeTree {
         return true;
     }
 
+
+    /**
+     * 对称的二叉树
+     * <p>
+     * 请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。
+     */
+    public boolean isSymmetric(Node root) {
+        if (root == null)
+            return true;
+        return helper(root.left, root.right);
+    }
+
+    public boolean helper(Node root1, Node root2) {
+        if (root1 == null && root2 == null)
+            return true;
+        if (root1 == null || root2 == null)
+            return false;
+        return root1.value == root2.value && helper(root1.left, root2.right) &&
+                helper(root1.right, root2.left);
+    }
 }

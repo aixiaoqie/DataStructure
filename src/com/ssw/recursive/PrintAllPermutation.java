@@ -39,7 +39,8 @@ public class PrintAllPermutation {
     }
 
     public static void main(String[] args) {
-        PrintAllPermutation("abb");
+        PrintAllPermutation("abc");
+        PrintAllPermutation("abc");
     }
 
 }
