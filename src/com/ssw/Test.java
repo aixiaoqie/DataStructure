@@ -8,9 +8,11 @@ public class Test {
 
     public static void main(String[] args) {
 
-        String s = "rat";
-        String t = "tar";
-        System.out.println(isAnagram(s,t));
+        char[] arr = new char[]{'a', 'b', 'c'};
+        System.out.println(arr);
+//        String s = "rat";
+//        String t = "tar";
+//        System.out.println(isAnagram(s,t));
     }
 
     public static boolean isAnagram(String s, String t) {
