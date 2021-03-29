@@ -1,7 +1,6 @@
 package com.ssw.binarytree;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 二叉树的按层打印 以及zigzag打印
@@ -43,8 +42,70 @@ public class PrintBinaryTree {
     }
 
 
-// TODO: 2021/3/7 二叉树的zigzag打印
+    /**
+     * 二叉树的zigzag按层打印
+     * <p>
+     * 使用双向队列dq
+     * 原则1：如果从左到右，从dq头部弹出节点，弹出的节点没有孩子节点，不用放入；
+     * 有孩子节点，先让左孩子从尾部进，再让右孩子尾部进入dq
+     * 原则2：如果从右到左，从dp尾部弹出节点，弹出的节点没有孩子节点，不用放入；
+     * 有孩子节点，先让右孩子从头部进，再让左孩子从头部进。
+     */
 
+
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Deque<Node> deque = new ArrayDeque<>();
+        deque.offer(root);
+        Node last = root;
+        Node nlast = null;
+        List<Integer> list = new ArrayList<>();
+        boolean flag = true;
+        while (!deque.isEmpty()) {
+            Node node = null;
+            if (flag) {
+                node = deque.pollFirst();
+                list.add(node.value);
+                System.out.print(node.value + " ");
+                if (node.left != null) {
+                    nlast = nlast == null ? node.left : nlast;
+                    deque.offerLast(node.left);
+                }
+                if (node.right != null) {
+                    nlast = nlast == null ? node.right : nlast;
+                    deque.offerLast(node.right);
+                }
+            } else {
+                node = deque.pollLast();
+                list.add(node.value);
+                System.out.print(node.value + " ");
+                if (node.right != null) {
+                    nlast = nlast == null ? node.right : nlast;
+                    deque.offerFirst(node.right);
+                }
+                if (node.left != null) {
+                    nlast = nlast == null ? node.left : nlast;
+                    deque.offerFirst(node.left);
+                }
+            }
+            if (node == last) {
+                last = nlast;
+                nlast = null;
+                flag = !flag;
+                List<Integer> copyList = new ArrayList<>();
+                Iterator it = list.iterator();
+                while (it.hasNext()) {
+                    copyList.add((Integer) it.next());
+                    it.remove();
+                }
+                res.add(copyList);
+            }
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         Node head = new Node(1);
@@ -57,6 +118,7 @@ public class PrintBinaryTree {
         left1_1.left = left2_1;
         right1_1.right = right2_4;
         PrintBinaryTree printBinaryTree = new PrintBinaryTree();
-        printBinaryTree.printBylevel(head);
+//        printBinaryTree.printBylevel(head);
+        List<List<Integer>> lists = printBinaryTree.levelOrder(head);
     }
 }
